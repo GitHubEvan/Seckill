@@ -5,7 +5,7 @@ import org.evan.seckill.entity.SuccessKilled;
 /**
  * Created by Evan on 9/13/2016.
  */
-public interface ISuccessKill {
+public interface ISuccessKillDao {
 
     /**
      *
