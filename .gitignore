@@ -4,3 +4,4 @@ ValorNAV_deploy/
 *.dll 
 .idea
 .idea/
+target/

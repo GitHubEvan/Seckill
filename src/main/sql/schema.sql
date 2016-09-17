@@ -24,9 +24,13 @@ INSERT INTO seckill(name,number,start_time,end_time)
       ('500ÔªÃëÉ±ipad',300,'2016-09-14 00:00:00','2016-09-15 00:00:00'),
       ('300ÔªÃëÉ±ºìÃ×note',1000,'2016-09-14 00:00:00','2016-09-15 00:00:00');
 
+use seckill;
+DROP TABLE  IF EXISTS success_killed;
 CREATE TABLE success_killed(
   seckill_id BIGINT NOT NULL COMMENT 'product id',
-  user_phone SMALLINT NOT NULL COMMENT 'user phone',
+  user_phone INT NOT NULL COMMENT 'user phone',
   state TINYINT NOT NULL DEFAULT -1 COMMENT '-1: invalid 0:sucess 1:paied',
-  create_time TIMESTAMP NOT NULL COMMENT 'create time'
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT 'seckill success table'
+  create_time TIMESTAMP NOT NULL COMMENT 'create time',
+  PRIMARY KEY (seckill_id,user_phone),
+  FOREIGN KEY (seckill_id) REFERENCES seckill (seckill_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT 'seckill success table'

@@ -1,5 +1,6 @@
 package org.evan.seckill.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.evan.seckill.entity.SuccessKilled;
 
 /**
@@ -8,12 +9,15 @@ import org.evan.seckill.entity.SuccessKilled;
 public interface ISuccessKillDao {
 
     /**
-     *
      * @param seckillId
      * @param userPhone
      * @return 插入的行数
      */
-    int insertSucessKilled(long seckillId,long userPhone);
+    int insertSuccessKilled(@Param("seckillId") long seckillId, @Param("userPhone") long userPhone);
 
+    /**
+     * @param seckillId
+     * @return
+     */
     SuccessKilled queryByIdWithSeckill(long seckillId);
 }
