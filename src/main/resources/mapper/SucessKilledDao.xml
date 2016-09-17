@@ -21,4 +21,18 @@
         INNER JOIN seckill s on sk.seckill_id = s.seckill_id
         WHERE sk.seckill_id = #{seckillId}
     </select>
+
+    <select id="queryByIdAndPhoneWithSeckill" resultType="SuccessKilled">
+        SELECT sk.seckill_id,sk.user_phone,sk.create_time,sk.state,
+        s.seckill_id "seckill.seckill_id",
+        s.name "seckill.name",
+        s.number "seckill.number",
+        s.start_time "seckill.start_time",
+        s.end_time "seckill.end_time",
+        s.create_time "seckill.seckill_create_time"
+        FROM success_killed sk
+        INNER JOIN seckill s on sk.seckill_id = s.seckill_id
+        WHERE sk.seckill_id = #{seckillId} and sk.user_phone=#{userPhone}
+    </select>
+
 </mapper>
