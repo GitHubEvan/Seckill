@@ -9,6 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Evan on 9/17/2016.
@@ -28,11 +30,20 @@ public class ISeckillDaoTest extends TestCase {
         Assert.assertTrue(id == seckill.getSeckillId());
     }
 
+    @Test
     public void testReduceNumber() throws Exception {
 
+        Date killTime = new Date();
+        int updateCount = seckillDao.reduceNumber(1000L,killTime);
+        System.out.println(updateCount);
     }
 
+    @Test
     public void testQueryAll() throws Exception {
 
+        List<Seckill> seckills = seckillDao.queryAll(0, 10);
+        for (Seckill seckill : seckills) {
+            System.out.println(seckill);
+        }
     }
 }

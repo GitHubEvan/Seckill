@@ -17,7 +17,7 @@
         WHERE seckill_id = #{seckillId}
     </select>
 
-    <select id="queryAll" resultType="Seckill" parameterType="int">
+    <select id="queryAll" resultType="Seckill">
         SELECT seckill_id,name,number,start_time,end_time,create_time
         FROM seckill
         ORDER BY create_time DESC
