@@ -13,6 +13,9 @@ import org.evan.seckill.exception.SeckillException;
 import org.evan.seckill.service.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
@@ -21,11 +24,15 @@ import java.util.List;
 /**
  * Created by Evan on 9/17/2016.
  */
+@Service
 public class SeckillServiceImpl implements SeckillService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired //@Resource, @Inject
     private ISeckillDao seckillDao;
+
+    @Autowired
     private ISuccessKillDao successKillDao;
 
     //ÓÃÓÚ»ìÏýMD5
@@ -63,6 +70,7 @@ public class SeckillServiceImpl implements SeckillService {
         return md5;
     }
 
+    @Transactional
     public SeckillExcution executeSeckill(long seckillId, long userPhone, String md5)
             throws SeckillException, RepeatSeckillException, SeckillCloseException {
         if (null == md5 || !md5.equals(getMD5(seckillId))) {
@@ -79,7 +87,7 @@ public class SeckillServiceImpl implements SeckillService {
                 if (insertCount <= 0) {
                     throw new RepeatSeckillException("repeate seckill");
                 } else {
-                    SuccessKilled successKilled = successKillDao.queryByIdWithSeckill(seckillId);
+                    SuccessKilled successKilled = successKillDao.queryByIdAndPhoneWithSeckill(seckillId,userPhone);
                     return new SeckillExcution(seckillId, SeckillStateEnum.SUCCESS, successKilled);
                 }
             }
